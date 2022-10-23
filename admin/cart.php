@@ -30,7 +30,7 @@ $resShow = mysqli_query($conn, $sqlSelect);
 $sum = 0;
 
 ?>
-<section class="h-100 h-custom" style="background: url(./img/backgr.jpg) repeat;">
+<section class="h-100 h-custom" style="background: url(../img/backgr.jpg) repeat;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12">

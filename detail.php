@@ -69,6 +69,6 @@ if (isset($_GET['id'])) {
     </div>
   </div>
 </section>
-</body>
-
-</html>
+<?php
+include_once("footer.php");
+?>

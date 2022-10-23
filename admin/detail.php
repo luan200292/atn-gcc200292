@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
 ?>
 <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<section class="h-100 h-custom" style="background: url(./img/backgr.jpg) repeat;">
+<section class="h-100 h-custom" style="background: url(../img/backgr.jpg) repeat;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col-12">
@@ -27,7 +27,7 @@ if (isset($_GET['id'])) {
             <div class="row g-0">
 
               <div class="col-lg-5 p-5">
-                <div class="image_selected ms-3"><img src="img/<?= $row[8] ?>" alt=""></div>
+                <div class="image_selected ms-3"><img src="../img/<?= $row[8] ?>" alt=""></div>
               </div>
               <div class="col-lg-7 p-5">
                 <div class="product_description">
@@ -67,6 +67,7 @@ if (isset($_GET['id'])) {
     </div>
   </div>
 </section>
-</body>
 
-</html>
+<?php
+include_once("../footer.php");
+?>

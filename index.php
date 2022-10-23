@@ -7,8 +7,8 @@ include_once("header.php");
     <?php
     include_once("connect.php");
     $sql = "select * from product";
-    $re = pg_query($connect, "SELECT * FROM product");
-    while( $row = pg_fetch_array($re)){
+    $re = mysqli_query($conn, "SELECT * FROM product");
+    while( $row = mysqli_fetch_array($re)){
     ?>
       <div class="col-md-4">
             <div class="card">
@@ -32,9 +32,8 @@ include_once("header.php");
       ?>
   </div>
 </div>
+<?php
+include_once("footer.php");
+?>
 
-</body>
-<script src="../assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script src="../assets/js/bootstrap.bundle.min.js"></script>
 
-</html>

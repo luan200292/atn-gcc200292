@@ -2,9 +2,8 @@
 include_once("header.php");
 include_once("connect.php");
 
-$user = $_SESSION['user'];
 if (isset($_SESSION['user'])) {
-
+  $user = $_SESSION['user'];
   if (isset($_GET['id'])) {
     $p_id = $_GET['id'];
     $checkEx = mysqli_query($conn, "SELECT p_id from cart where username ='$user' and p_id='$p_id'");
@@ -23,7 +22,7 @@ if (isset($_SESSION['user'])) {
   }
 
 } else {
-  header("Location: login.php");
+  echo "<script> location.href = 'login.php'</script>";
 }
 
 $sqlSelect = "SELECT * FROM cart c, product p WHERE c.p_id = p.Product_id and username = '$user'";
