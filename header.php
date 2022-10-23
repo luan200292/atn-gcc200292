@@ -29,15 +29,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-            <a class="nav-link" href="index.php">Home</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="cart.php">Cart</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="AboutUs.php">About us</a>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="cart.php">Cart</a></li>
+            <li class="nav-item"><a class="nav-link" href="AboutUs.php">About us</a></li>
             <li class="nav-item">
                 <form class="d-flex" action="search_product.php" method="POST">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" 

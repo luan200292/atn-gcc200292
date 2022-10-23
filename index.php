@@ -1,6 +1,5 @@
 <?php
 include_once("header.php");
-
 ?>
 <div class="container mt-3">
   <h2>All Products</h2>
