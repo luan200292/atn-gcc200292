@@ -10,10 +10,10 @@ if($conn->connect_error){
     die("Failed ".$conn->connect_error);
 }
 
-// $connect = pg_connect("postgres://aplgbbvfsxcumt:96be0b6f5c7fdc3d0c1db96f23be41a36b8c8705d44f842d1ac1de8f7cd96559@ec2-52-70-45-163.compute-1.amazonaws.com:5432/ddcas6v5knkt8l");
+$connect = pg_connect("postgres://oakrmkxyxkzrcn:290b4d7f5261f0b87e9ad4092e07849ca3f8a057c48dfb741bd9d5db81a46ad2@ec2-23-21-76-219.compute-1.amazonaws.com:5432/d5p244d1hmimcv");
 
-// if(!$connect){
-//     die("Connect failed!");
-// }
+if(!$connect){
+    die("Connect failed!");
+}
 
 ?>

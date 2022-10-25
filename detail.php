@@ -3,9 +3,9 @@ include_once("header.php");
 include_once("connect.php");
 
 if (isset($_GET['id'])) {
-  $sql = "select * from product where Product_ID='" . $_GET['id'] . "'";
-  $res = mysqli_query($conn, $sql);
-  $row = mysqli_fetch_row($res);
+  $sql = "select * from product where product_id ='" . $_GET['id'] . "'";
+  $res = pg_query($connect, $sql);
+  $row = pg_fetch_row($res);
 } else if (isset($_GET['pid']) && isset($_GET['quantity_input'])) {
   echo "<script> 
   window.location = 'cart.php?pid=" . $_GET['pid'] .
@@ -29,7 +29,7 @@ if (isset($_GET['id'])) {
             <div class="row g-0">
 
               <div class="col-lg-5 p-5">
-                <div class="image_selected ms-3"><img src="img/<?= $row[8] ?>" alt=""></div>
+                <div class="image_selected ms-3"><img src="img/<?= $row[7] ?>" alt=""></div>
               </div>
               <div class="col-lg-7 p-5">
                 <div class="product_description">
@@ -38,8 +38,8 @@ if (isset($_GET['id'])) {
                   <div> <span class="product_price"><span>&#36;</span> <?= $row[2] ?></div>
 
                   <div>
-                    <span class="product_info"><?= $row[5] ?><span><br>
-                        <span class="product_info">In Stock: <?= $row[7] ?><span>
+                    <span class="product_info"><?= $row[4] ?><span><br>
+                        <span class="product_info">In Stock: <?= $row[6] ?><span>
                   </div>
 
                   <hr class="singleline">

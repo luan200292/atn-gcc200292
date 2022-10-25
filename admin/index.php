@@ -7,26 +7,29 @@ include_once("header.php");
     <?php
     include_once("connect.php");
     $sql = "select * from product";
-    $re = mysqli_query($conn, $sql);
-    while( $row = mysqli_fetch_array($re)){
+    $re = pg_query($connect, "SELECT * FROM product");
+    while( $row = pg_fetch_array($re)){
     ?>
       <div class="col-md-4">
             <div class="card">
                 <img
-                src="../img/<?=$row['Pro_image']?>"
+                src="img/<?=$row['pro_image']?>"
                 class="card-img-top"
-                alt="<?=$row['Product_Name']?>" style="margin: auto; width: max-content;" height="250px"/>
+                alt="<?=$row['product_name']?>" style="margin: auto;
+    width: max-content;" height="250px"
+                />
                 <div class="card-body">
-                <a href="detail.php?id=<?=$row['Product_ID']?>" class="text-decoration-none">
-                <h5 class="card-title"><?=$row['Product_Name']?></h5></a>
-                <h6 class="card-subtitle mb-2 text-muted"><span>&#36;</span><?=$row['Price']?></h6>
-                <a href="cart.php?id=<?=$row['Product_ID']?>" class="btn btn-primary">Add to Cart</a>
+                <a href="detail.php?id=<?=$row['product_id']?>" class="text-decoration-none">
+                <h5 class="card-title"><?=$row['product_name']?></h5></a>
+                <h6 class="card-subtitle mb-2 text-muted"><span>&#36;</span><?=$row['price']?></h6>
+                <a href="cart.php?id=<?=$row['product_id']?>" 
+                class="btn btn-primary">Add to Cart</a>
                 </div>
             </div>
       </div>
-    <?php
+      <?php
     }
-    ?>
+      ?>
   </div>
 </div>
 
