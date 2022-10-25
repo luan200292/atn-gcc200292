@@ -43,7 +43,7 @@
                         Welcome, <?=$_SESSION['user']?>
                         <a href="logout.php" style="text-decoration: none; color: black;"> Logout</a>
                         <?php 
-                            if($_SESSION['user'] == "admin"){ 
+                            if($_SESSION['role'] == "admin"){ 
                         ?>
                         <a href="product/index.php" style="text-decoration: none; color: black;"> || <i class="bi bi-gear-fill">Administration</i></a>
                         <?php } ?>

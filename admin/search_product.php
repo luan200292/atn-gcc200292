@@ -4,8 +4,8 @@ include_once("connect.php");
 
 if (isset($_POST['Search_button'])) {
     $keyword = $_POST['Search_product'];
-    $sql = "SELECT * FROM `product` WHERE Product_Name LIKE '%$keyword%' ORDER BY Product_ID DESC";
-    $re = mysqli_query($conn, $sql);
+    $sql = "SELECT * FROM product WHERE product_name LIKE '%$keyword%'";
+    $re = pg_query($connect, $sql);
 }
 ?>
 <div class="container mt-3">
@@ -21,7 +21,7 @@ if (isset($_POST['Search_button'])) {
         ?>
         <div class="col-md-4">
             <div class="card">
-                <img src="img/<?= $row['pro_image'] ?>" class="card-img-top" alt="<?= $row['product_name'] ?>"
+                <img src="../img/<?= $row['pro_image'] ?>" class="card-img-top" alt="<?= $row['product_name'] ?>"
                     style="margin: auto; width: max-content;" height="250px" />
                 <div class="card-body">
                     <a href="detail.php?id=<?= $row['product_id'] ?>" class="text-decoration-none">

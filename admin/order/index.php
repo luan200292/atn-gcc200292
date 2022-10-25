@@ -4,7 +4,7 @@ include_once("../headerA.php");
 <style>
 .example-wrapper {
     margin: 1em auto;
-    max-width: 1200px;
+    max-width: 1200px;$conn
     width: 90%;
     font: 18px/1.5 sans-serif;
 }
@@ -22,7 +22,7 @@ td, th, a {
 <?php
     include_once("../connect.php");
     $sql1 = "select * from orders";
-    $re1 = mysqli_query($conn,$sql1);
+    $re1 = pg_query($connect,$sql1);
     ?>
 
 <div class="example-wrapper">
@@ -43,29 +43,29 @@ td, th, a {
             </thead>
             <tbody>
                 <?php
-                            while($row = mysqli_fetch_assoc($re1)){
+                            while($row = pg_fetch_assoc($re1)){
                             ?>
                 <tr>
-                    <td><?=$row['OrderID']?></td>
-                    <td><?=$row['OrderDate']?></td>
-                    <td><?=$row['DeliveryDate']?></td>
-                    <td><?=$row['Address']?></td>
+                    <td><?=$row['order_id']?></td>
+                    <td><?=$row['orderdate']?></td>
+                    <td><?=$row['deliverydate']?></td>
+                    <td><?=$row['address']?></td>
                     <td><span>&#36;</span>
                         <?php
-                                        $id = $row['OrderID'];
-                                        $totalpay = mysqli_query($conn, "SELECT * FROM orders where OrderID = '$id'");
-                                        $payment = mysqli_fetch_row($totalpay);
+                                        $id = $row['order_id'];
+                                        $totalpay = pg_query($connect, "SELECT * FROM orders where order_id = '$id'");
+                                        $payment = pg_fetch_row($totalpay);
                                     ?>
                         <?=$payment[4]?>
                     </td>
                     <td><?=$row['status']?></td>
                     <td>
-                        <a href="update.php?id=<?=$row['OrderID']?>" class="btn btn-outline-success rounded-pill">
+                        <a href="update.php?id=<?=$row['order_id']?>" class="btn btn-outline-success rounded-pill">
                             Update
                         </a>
                     </td>
                     <td>
-                        <a href="delete.php?id=<?=$row['OrderID']?>" class="btn btn-outline-warning rounded-pill">
+                        <a href="delete.php?id=<?=$row['order_id']?>" class="btn btn-outline-warning rounded-pill">
                             Delete
                         </a>
                     </td>

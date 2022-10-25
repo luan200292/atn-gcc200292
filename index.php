@@ -7,7 +7,7 @@ include_once("header.php");
     <?php
     include_once("connect.php");
     $sql = "select * from product";
-    $re = pg_query($connect, "SELECT * FROM product");
+    $re = pg_query($connect, "SELECT * FROM product ORDER BY product_id ASC");
     while( $row = pg_fetch_array($re)){
     ?>
       <div class="col-md-4">

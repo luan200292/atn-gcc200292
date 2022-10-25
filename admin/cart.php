@@ -2,31 +2,30 @@
 include_once("header.php");
 include_once("connect.php");
 
-$user = $_SESSION['user'];
 if (isset($_SESSION['user'])) {
-
+  $user = $_SESSION['user'];
   if (isset($_GET['id'])) {
     $p_id = $_GET['id'];
-    $checkEx = mysqli_query($conn, "select p_id from cart where username ='$user' and p_id='$p_id'");
+    $checkEx = pg_query($connect, "select p_id from cart where username ='$user' and p_id='$p_id'");
 
-    if (mysqli_num_rows($checkEx) == 0) {
-      $query = "INSERT INTO cart(username, p_id, p_qty, date) VALUES('$user',
-    '$p_id',1,CURDATE())";
+    if (pg_num_rows($checkEx) == 0) {
+      $query = "INSERT INTO cart (username, p_id, p_qty, date) VALUES ('$user',
+    '$p_id',1, CURRENT_DATE)";
     } else {
       $query = "UPDATE cart SET p_qty = p_qty + 1 where username = '$user' and
     p_id = '$p_id'";
     }
 
-    if (!mysqli_query($conn, $query)) {
-      echo "Error " . mysqli_error($conn);
+    if (!pg_query($connect, $query)) {
+      echo "Error " . pg_error($connect);
     }
   }
 } 
 else {
-  header("Location: ../login.php");
+  echo "<script> location.href = '../login.php'</script>";
 }
-$sqlSelect = "SELECT * FROM cart c, product p WHERE c.p_id = p.Product_id and username = '$user'";
-$resShow = mysqli_query($conn, $sqlSelect);
+$sqlSelect = "SELECT * FROM cart c, product p WHERE c.p_id = p.product_id and username = '$user'";
+$resShow = pg_query($connect, $sqlSelect);
 $sum = 0;
 
 ?>
@@ -41,30 +40,30 @@ $sum = 0;
                 <div class="p-5">
                   <div class="d-flex justify-content-between align-items-center mb-5">
                     <h1 class="fw-bold mb-0 text-black">Shopping Cart</h1>
-                    <h6 class="mb-0 text-muted"><?= mysqli_num_rows($resShow) ?> item(s)</h6>
+                    <h6 class="mb-0 text-muted"><?= pg_num_rows($resShow) ?> item(s)</h6>
                   </div>
                   <?php
-                  while ($row = mysqli_fetch_assoc($resShow)) {
+                  while ($row = pg_fetch_assoc($resShow)) {
                   ?>
                     <hr class="my-4">
 
                     <div class="row mb-4 d-flex justify-content-between align-items-center">
                       <div class="col-md-2 col-lg-2 col-xl-2">
-                        <img src="./img/<?= $row['Pro_image'] ?>" class="img-fluid rounded-3" alt="">
+                        <img src="../img/<?= $row['pro_image'] ?>" class="img-fluid rounded-3" alt="">
                       </div>
                       <div class="col-md-3 col-lg-3 col-xl-3">
-                        <h6 class="text-black mb-0"><?= $row['Product_Name'] ?></h6>
+                        <h6 class="text-black mb-0"><?= $row['product_name'] ?></h6>
                       </div>
                       <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
 
                         <input id="form1" min="0" name="quantity" value="<?= $row['p_qty'] ?>" type="number" class="form-control form-control-sm" />
                       </div>
                       <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                        <h6 class="mb-0"><span>&#36;</span> <?= $row['p_qty'] ?> * <?= $row['Price'] ?></h6>
+                        <h6 class="mb-0"><span>&#36;</span> <?= $row['p_qty'] ?> * <?= $row['price'] ?></h6>
                       </div>
 
                       <?php
-                      $sum = $sum + $row['p_qty'] * $row['Price'];
+                      $sum = $sum + $row['p_qty'] * $row['price'];
                       ?>
 
                       <div class="col-md-1 col-lg-1 col-xl-1 text-end">

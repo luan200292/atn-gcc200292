@@ -25,31 +25,31 @@ include_once("../connect.php");
 
 if(isset($_GET['id'])){
     $oid = $_GET['id'];
-    $sql = "select * from orders where OrderID = '$oid'";
-    $re = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($re);
+    $sql = "select * from orders where order_id = '$oid'";
+    $re = pg_query($connect, $sql);
+    $row = pg_fetch_assoc($re);
     
 }
 
 if(isset($_POST['Update'])){
     $oid = $_GET['id'];
-    $Orderdate = mysqli_real_escape_string($conn, $_POST['OrderDate']);
-    $Address = mysqli_real_escape_string($conn, $_POST['Address']);
-    $Payment = mysqli_real_escape_string($conn, $_POST['Payment']);
-    $status = mysqli_real_escape_string($conn, $_POST['status']);
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $Orderdate = pg_escape_string($connect, $_POST['OrderDate']);
+    $Address = pg_escape_string($connect, $_POST['Address']);
+    $Payment = pg_escape_string($connect, $_POST['Payment']);
+    $status = pg_escape_string($connect, $_POST['status']);
+    $username = pg_escape_string($connect, $_POST['username']);
 
     if($status == "Delivered"){
-        $uSQL = "UPDATE `orders` SET `OrderDate`='$Orderdate', `DeliveryDate` = CURDATE(), `Address`='$Address',
-    `Payment`='$Payment', `status`='$status', `username`='$username' WHERE `OrderID`='$oid'";
-    }else{
-        $uSQL = "UPDATE `orders` SET `OrderDate`='$Orderdate', `Address`='$Address',
-    `Payment`='$Payment', `status`='$status', `username`='$username' WHERE `OrderID`='$oid'";
+        $uSQL = "UPDATE public.orders SET orderdate = $Orderdate, deliverydate = CURRENT_DATE, address= '$Address',
+    payment = $Payment, status = '$status', username = '$username' WHERE order_id = '$oid'";
+    }else{ 
+        $uSQL = "UPDATE public.orders SET orderdate = $Orderdate, address = '$Address',
+    payment = $Payment, status = '$status', username = '$username' WHERE order_id = '$oid'";
     }
-    if (mysqli_query($conn, $uSQL)) {
+    if (pg_query($connect, $uSQL)) {
         echo "<script> window.location = 'index.php?status=Update' </script>";
     } else{
-        echo "error". $uSQL. "<br>". mysqli_error($conn);
+        echo "error". $uSQL. "<br>". pg_error($connect);
     }
     
 }
@@ -72,7 +72,7 @@ if(isset($_POST['Update'])){
                                         <label for="" class="col-sm-2 control-label">Order ID: </label>
                                         <div class="col-sm-10">
                                             <input type="text" id="oid" class="form-control" name="oid"
-                                                value="<?=$row['OrderID']?>" disabled>
+                                                value="<?=$row['order_id']?>" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@ if(isset($_POST['Update'])){
                                         <label for="" class="col-sm-2 control-label">Order Date: </label>
                                         <div class="col-sm-10">
                                             <input id="OrderDate" class="form-control" type="date" name="OrderDate"
-                                                value="<?=$row['OrderDate']?>" />
+                                                value="<?=$row['orderdate']?>" />
                                         </div>
                                     </div>
                                 </div>
@@ -90,7 +90,7 @@ if(isset($_POST['Update'])){
                                         <label for="" class="col-sm-2 control-label">Address: </label>
                                         <div class="col-sm-10">
                                             <input type="text" id="Address" class="form-control" name="Address"
-                                                placeholder="Product Name" value="<?=$row['Address']?>">
+                                                placeholder="Product Name" value="<?=$row['address']?>">
                                         </div>
                                     </div>
                                 </div>
@@ -100,15 +100,15 @@ if(isset($_POST['Update'])){
                                         <div class="col-sm-10">
                                             <div class="row">
                                                 <?php
-                                                    $sql1 = mysqli_query($conn, "SELECT sum(total) FROM `orders_detail` WHERE Order_ID='$oid'");
-                                                    $result = mysqli_fetch_row($sql1);
+                                                    $sql1 = pg_query($connect, "SELECT sum(total) FROM orders_detail WHERE order_id = '$oid'");
+                                                    $result = pg_fetch_row($sql1);
                                                 ?>
                                                 <div class="col-8">
                                                     <input type="number" id="Payment" class="form-control"
                                                         name="Payment" value="<?=$result[0]?>" readonly>
                                                 </div>
                                                 <div class="col-4">
-                                                    <a href="insertDetail.php?id=<?=$row['OrderID']?>"><button
+                                                    <a href="insertDetail.php?id=<?=$row['order_id']?>"><button
                                                             type="button" class="btn btn-warning rounded-pill"
                                                             name="Detail">Add/Update</button></a>
                                                 </div>

@@ -6,14 +6,14 @@ if (isset($_POST['btnLogin'])) {
     $email = $_POST['email'];
     $pwd = md5($_POST['Password']);
 
-    $sql = "SELECT * FROM customer WHERE email = '$email' and Password = '$pwd'";
-    $re = mysqli_query($conn, $sql);
+    $sql = "SELECT * FROM public.user WHERE email = '$email' and password = '$pwd'";
+    $re = pg_query($connect, $sql);
 
-    if (mysqli_num_rows($re) > 0) {
-        $row = mysqli_fetch_assoc($re);
-        $_SESSION['user'] = $row['Username'];
-        // $_SESSION['role'] = $row['Role'];
-        if ($row['Username'] == "admin") {
+    if (pg_num_rows($re) > 0) {
+        $row = pg_fetch_assoc($re);
+        $_SESSION['user'] = $row['username'];
+        $_SESSION['role'] = $row['role'];
+        if ($row['role'] == "admin") {
             echo "<script> location.href = 'admin/index.php'</script>";
         } else {
             echo "<script> location.href = 'index.php'</script>";

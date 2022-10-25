@@ -4,7 +4,7 @@ include_once("connect.php");
 
 if (isset($_POST['Search_button'])) {
     $keyword = $_POST['Search_product'];
-    $sql = "SELECT * FROM product WHERE product_name LIKE '%$keyword%'";
+    $sql = "SELECT * FROM product WHERE product_name LIKE '%$keyword%' ORDER BY product_id ASC";
     $re = pg_query($connect, $sql);
 }
 ?>

@@ -7,13 +7,13 @@ include_once("header.php");
     <?php
     include_once("connect.php");
     $sql = "select * from product";
-    $re = pg_query($connect, "SELECT * FROM product");
+    $re = pg_query($connect, "SELECT * FROM product ORDER BY product_id ASC");
     while( $row = pg_fetch_array($re)){
     ?>
       <div class="col-md-4">
             <div class="card">
                 <img
-                src="img/<?=$row['pro_image']?>"
+                src="../img/<?=$row['pro_image']?>"
                 class="card-img-top"
                 alt="<?=$row['product_name']?>" style="margin: auto;
     width: max-content;" height="250px"

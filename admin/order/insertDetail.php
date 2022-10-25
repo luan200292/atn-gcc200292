@@ -30,43 +30,43 @@ a {
         if (isset($_GET['odid'])) {
             $OrderDetail_ID = $_GET['odid'];
 
-            $listDetail = "select * from orders_detail where Order_ID='" . $_GET['id'] . "' and OrderDetail_ID = '" . $_GET['odid'] . "'";
-            $res1 = mysqli_query($conn, $listDetail);
-            $lD = mysqli_fetch_row($res1);
+            $listDetail = "select * from orders_detail where order_id ='" . $_GET['id'] . "' and orderdeatil_id = '" . $_GET['odid'] . "'";
+            $res1 = pg_query($connect, $listDetail);
+            $lD = pg_fetch_row($res1);
         }
 
 
         if (isset($_POST['Insert'])) {
 
-            $Product_ID = mysqli_real_escape_string($conn, $_POST['Product_ID']);
-            $Pro_Qty = mysqli_real_escape_string($conn, $_POST['Pro_Qty']);
+            $Product_ID = pg_escape_string($connect, $_POST['Product_ID']);
+            $Pro_Qty = pg_escape_string($connect, $_POST['Pro_Qty']);
 
-            $data = mysqli_query($conn, "select Price from product where Product_ID='$Product_ID'");
-            $rData = mysqli_fetch_assoc($data);
-            $Price = $rData['Price'];
+            $data = pg_query($connect, "select rice from public.product where product_id = '$Product_ID'");
+            $rData = pg_fetch_assoc($data);
+            $Price = $rData['price'];
             $total = $Price * $Pro_Qty;
 
             
-            $checkEx = mysqli_query($conn, "SELECT Product_ID FROM orders_detail WHERE `Order_ID`='$id' and `Product_ID` = '$Product_ID'");
+            $checkEx = pg_query($connect, "SELECT product_id FROM orders_detail WHERE order_id = '$id' and product_id = '$Product_ID'");
                 
-                if (mysqli_num_rows($checkEx) == 0) {
-                $insertQuery = "INSERT INTO `orders_detail`( `Order_ID`, `Product_ID`, `Pro_Qty`, `Price`, `Total`) 
+                if (pg_num_rows($checkEx) == 0) {
+                $insertQuery = "INSERT INTO public.orders_detail( order_id, product_id, pro_qty, price, total) 
             VALUES ('$id','$Product_ID',$Pro_Qty,$Price,$total)";
             
 
             } else {
-                $insertQuery = "UPDATE orders_detail SET Pro_Qty= Pro_Qty + $Pro_Qty, Total = Total + $total 
-            WHERE `Order_ID`='$id' and `Product_ID` = '$Product_ID'";
+                $insertQuery = "UPDATE orders_detail SET pro_qty = pro_qty + $Pro_Qty, total = total + $total 
+            WHERE order_id = '$id' and product_id = '$Product_ID'";
             }
 
-            if (mysqli_query($conn, $insertQuery)) {
+            if (pg_query($connect, $insertQuery)) {
             } else {
-                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                echo "Error: " . $sql . "<br>" . pg_error($connect);
             }
             
         }
-        $sumTotalQuery  = mysqli_query($conn, "SELECT sum(total) FROM `orders_detail` WHERE Order_ID='$id'");
-        $sumTotal = mysqli_fetch_row($sumTotalQuery);
+        $sumTotalQuery  = pg_query($connect, "SELECT sum(total) FROM public.orders_detail WHERE order_id = '$id'");
+        $sumTotal = pg_fetch_row($sumTotalQuery);
 
     ?>
 <!-- div content -->
@@ -108,10 +108,10 @@ a {
                                             <datalist id="p">
                                                 <?php
                                                     $selectProduct = "select * from product";
-                                                    $rePro = mysqli_query($conn, $selectProduct);
-                                                    while ($rowP = mysqli_fetch_assoc($rePro)) {
+                                                    $rePro = pg_query($connect, $selectProduct);
+                                                    while ($rowP = pg_fetch_assoc($rePro)) {
                                                     ?>
-                                                <option value="<?= $rowP['Product_ID'] ?>"><?= $rowP['Product_Name'] ?>
+                                                <option value="<?= $rowP['product_id'] ?>"><?= $rowP['product_name'] ?>
                                                 </option>
                                                 <?php
                                                     }
@@ -140,8 +140,8 @@ a {
     </div>
     <?php
 
-            $listProduct = "select * from orders_detail where Order_ID='" . $_GET['id'] . "'";
-            $r = mysqli_query($conn, $listProduct);
+            $listProduct = "select * from public.orders_detail where order_id ='" . $_GET['id'] . "'";
+            $r = pg_query($connect, $listProduct);
 
             ?>
     <div class="container mb-3">
@@ -164,17 +164,17 @@ a {
                 </tr>
             </thead>
             <tbody>
-                <?php while ($resLP = mysqli_fetch_assoc($r)) { ?>
+                <?php while ($resLP = pg_fetch_assoc($r)) { ?>
                 <tr>
-                    <td><?= $resLP['Order_ID'] ?></td>
-                    <td><?= $resLP['OrderDetail_ID'] ?></td>
-                    <td><?= $resLP['Product_ID'] ?></td>
-                    <td><?= $resLP['Pro_Qty'] ?></td>
-                    <td><?= $resLP['Price'] ?></td>
-                    <td><?= $resLP['Total'] ?></td>
-                    <td><a href="insertDetail.php?id=<?= $resLP['Order_ID'] ?>&odid=<?= $resLP['OrderDetail_ID'] ?>"
+                    <td><?= $resLP['order_id'] ?></td>
+                    <td><?= $resLP['oderdetail_id'] ?></td>
+                    <td><?= $resLP['product_id'] ?></td>
+                    <td><?= $resLP['pro_qty'] ?></td>
+                    <td><?= $resLP['price'] ?></td>
+                    <td><?= $resLP['total'] ?></td>
+                    <td><a href="insertDetail.php?id=<?= $resLP['order_id'] ?>&odid=<?= $resLP['oderdetail_id'] ?>"
                             class="btn btn-warning rounded-pill">Update</a></td>
-                    <td><a href="delete.php?oid=<?= $resLP['Order_ID'] ?>&odid=<?= $resLP['OrderDetail_ID'] ?>"
+                    <td><a href="delete.php?oid=<?= $resLP['order_id'] ?>&odid=<?= $resLP['oderdetail_id'] ?>"
                             class="btn btn-warning rounded-pill">Delete</a></td>
 
                 </tr>

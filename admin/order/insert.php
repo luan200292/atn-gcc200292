@@ -25,20 +25,20 @@ a {
 
         if(isset($_POST['Insert'])){
 
-            $orderDate = mysqli_real_escape_string($conn, $_POST['OrderDate']);
-            $address = mysqli_real_escape_string($conn, $_POST['Address']);
-            $username = mysqli_real_escape_string($conn, $_POST['username']);
+            $orderDate = pg_real_escape_string($connect, $_POST['orderdate']);
+            $address = pg_real_escape_string($connect, $_POST['address']);
+            $username = pg_real_escape_string($connect, $_POST['username']);
 
-            $insertQ = "INSERT INTO `orders`(`OrderDate`, `Address`, `username`) 
+            $insertQ = "INSERT INTO orders (orderdate, address, username) 
                         VALUES ('$orderDate','$address','$username')";
 
-            if(mysqli_query($conn, $insertQ)){
+            if(pg_query($connect, $insertQ)){
                 echo"<script>
                     window.location = 'index.php?status=insert'
                 </script>";
             }
             else{
-                echo "error: ". $insertQ. "<br>". mysqli_errno($conn);
+                echo "error: ". $insertQ. "<br>". pg_errno($connect);
             }
             
         }
@@ -84,8 +84,8 @@ a {
 
                                                 <?php
                                                 $uSql = "select * from customer";
-                                                $re2 = mysqli_query($conn, $uSql);
-                                                while($rowU = mysqli_fetch_assoc($re2)){
+                                                $re2 = pg_query($connect, $uSql);
+                                                while($rowU = pg_fetch_assoc($re2)){
                                                 ?>
                                                 <option value="<?=$rowU['Username']?>">
                                                     <?=$rowU['Username']?>

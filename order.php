@@ -7,59 +7,60 @@ include_once("connect.php");
         $user = $_SESSION['user'];
         
         $sql = "select * from cart where username = '$user'";
-        $re = mysqli_query($conn, $sql);
+        $re = pg_query($connect, $sql);
 
-        if (mysqli_num_rows($re) > 0) {
+        if (pg_num_rows($re) > 0) {
 
         // Insert Order table
 
-        $sql1 = "select Address from customer where Username = '$user'";
-        $re1 = mysqli_query($conn, $sql1);
-        $row1 = mysqli_fetch_assoc($re1);
-        $add = $row1['Address'];
+        $sql1 = "SELECT * from public.user where username = '$user'";
+        $re1 = pg_query($connect, $sql1);
+        $row1 = pg_fetch_assoc($re1);
+        $add = $row1['address'];
 
-        $sql2 = "SELECT SUM(p_qty*Price), p_qty, Price from product p, cart c WHERE p.Product_ID = c.p_id and username = '$user'";
-        $re2 = mysqli_query($conn, $sql2);
-        $row2 = mysqli_fetch_assoc($re2);
-        $pay = $row2['SUM(p_qty*Price)'];
+        $sql2 = "SELECT SUM(pro_qty*price) as sum, pro_qty, price from product p, cart c 
+        WHERE p.product_id = c.p_id and username = '$user' group by pro_qty, price";
+        $re2 = pg_query($connect, $sql2);
+        $row2 = pg_fetch_assoc($re2);
+        $pay = $row2['sum'];
         
-        $sql3 = "INSERT INTO `orders`(`OrderDate`, `Address`,`Payment`, `username`) VALUES (NOW(),'$add',' $pay' ,'$user')";
-        mysqli_query($conn, $sql3);
+        $sql3 = "INSERT INTO public.orders (orderdate, address, payment, username) VALUES (CURRENT_DATE ,'$add', $pay ,'$user')";
+        pg_query($connect, $sql3);
 
         // Insert Order Detail
 
         //Get ID of order
-        $oid = "SELECT MAX(OrderID) FROM orders";
-        $re3 = mysqli_query($conn, $oid);
-        $row3 = mysqli_fetch_assoc($re3);
-        $orderid = $row3['MAX(OrderID)'];
+        $oid = "SELECT MAX(order_id) as orderid FROM orders";
+        $re3 = pg_query($connect, $oid);
+        $row3 = pg_fetch_assoc($re3);
+        $orderid = $row3['orderid'];
         
         //Insert into order detail
-        $sql4 = "SELECT * FROM cart c, product p WHERE c.p_id = p.Product_ID and username = '$user'";
-        $re4 = mysqli_query($conn, $sql4);
-        while($row = mysqli_fetch_assoc($re4)){
+        $sql4 = "SELECT * FROM cart c, product p WHERE c.p_id = p.product_id and username = '$user'";
+        $re4 = pg_query($connect, $sql4);
+        while($row = pg_fetch_assoc($re4)){
             $pro_id = $row['p_id'];
             $pro_qty = $row['p_qty'];
-            $price = $row['Price'];
-            $total = $row['p_qty'] * $row['Price'];
+            $price = $row['price'];
+            $total = $row['p_qty'] * $row['price'];
 
-            $sql5 = "INSERT INTO `orders_detail`(`Order_ID`, `Product_ID`, `Pro_Qty`, `Price`, `Total`) 
+            $sql5 = "INSERT INTO orders_detail (order_id, product_id, pro_qty, price, total) 
             VALUES ($orderid, '$pro_id', $pro_qty, $price, $total)";
-            mysqli_query($conn, $sql5);
+            pg_query($connect, $sql5);
         }
 
         // Result
 
         $delete = "delete from cart where username = '$user'";
-        mysqli_query($conn, $delete);
+        pg_query($connect, $delete);
 
         //Check admin
         
         echo "<script>alert('Order successfully')</script>";
-        $checkadm = mysqli_query($conn, "SELECT * FROM customer WHERE Username = '$user'");
-        $rowadm = mysqli_fetch_assoc($checkadm);
-        $_SESSION['user'] = $rowadm['Username'];
-        if($rowadm['Username'] == "admin"){
+        $checkadm = pg_query($connect, "SELECT * FROM public.user WHERE username = '$user'");
+        $rowadm = pg_fetch_assoc($checkadm);
+        $_SESSION['role'] = $rowadm['role'];
+        if($rowadm['role'] == "admin"){
             echo"<script>window.location = 'admin/index.php'</script>";
         }else{
             echo"<script>window.location = 'index.php'</script>";
@@ -67,10 +68,10 @@ include_once("connect.php");
     }
     else {
         echo "<script>alert('Please add product to order')</script>";
-        $checkadm = mysqli_query($conn, "SELECT * FROM customer WHERE Username = '$user'");
-        $rowadm = mysqli_fetch_assoc($checkadm);
-        $_SESSION['user'] = $rowadm['Username'];
-        if($rowadm['Username'] == "admin"){
+        $checkadm = pg_query($connect, "SELECT * FROM public.user WHERE username = '$user'");
+        $rowadm = pg_fetch_assoc($checkadm);
+        $_SESSION['role'] = $rowadm['role'];
+        if($rowadm['role'] == "admin"){
             echo"<script>window.location = 'admin/index.php'</script>";
         }else{
             echo"<script>window.location = 'index.php'</script>";
