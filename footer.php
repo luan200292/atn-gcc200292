@@ -5,11 +5,11 @@
 					<div class="col-md-4 col-xs-6">
 						<div class="footer">
 							<h3 id="aboutus" class="footer-title">About Us</h3>
-							<p style="text-align:justify;">ATNShop put our continued success down to knowing
-                             what consumers and businesses need and having an extensive 
-                             range of the best phone for customers. LDTShop is committed
-                              to providing excellent customer service and we aim to provide
-                             accurate and useful product advice to customers through our website.</p>
+							<p style="text-align:justify;">ATNShop put our continued success down to 
+							knowing what consumers and businesses need and having an extensive range 
+							of the best toy for customers is teenagers. ATNShop is committed to providing
+							 excellent customer service and we aim to provide accurate and useful product
+							  advice to customers through our website.</p>
 						</div>
 					</div>
 
