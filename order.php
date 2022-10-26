@@ -19,7 +19,7 @@ include_once("connect.php");
         $add = $row1['address'];
 
         $sql2 = "SELECT SUM(c.p_qty*p.price) as sum, c.p_qty, p.price from product p, cart c 
-        WHERE p.product_id = c.p_id and username = 'admin' group by c.p_qty, p.price";
+        WHERE p.product_id = c.p_id and username = '$user' group by c.p_qty, p.price";
         $re2 = pg_query($connect, $sql2);
         $row2 = pg_fetch_assoc($re2);
         $pay = $row2['sum'];
