@@ -19,9 +19,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
 
-    <!-- My Script -->
-
-
 </head>
 
 <body>
@@ -30,9 +27,9 @@
         <div id="top-header">
             <div class="container">
                 <ul class="header-links float-left">
-                    <li><a href="#"><i class="bi bi-telephone-fill"></i> $Product_Phone</a></li>
-                    <li><a href="#"><i class="bi bi-envelope"></i> $Product_Email</a></li>
-                    <li><a href="#"><i class="bi bi-geo-alt-fill"></i> $Product_Address</a></li>
+                    <li><a href="#"><i class="bi bi-telephone-fill"></i> 19002002</a></li>
+                    <li><a href="#"><i class="bi bi-envelope"></i> atn@gmail.com</a></li>
+                    <!-- <li><a href="#"><i class="bi bi-geo-alt-fill"></i> $Product_Address</a></li> -->
                 </ul>
                 <ul class="header-links float-right">
                     <?php  
@@ -73,7 +70,7 @@
                         <a class="nav-link" href="index.php" style="color:black">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="" style="color:black">New Product</a>
+                        <a class="nav-link" href="" style="color:black">Shop</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="cart.php" style="color:black">Cart</a>
@@ -81,11 +78,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#aboutus" style="color:black">About us</a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link" 
-                        href="{{ path('app_customer_account', {'username': app.user.userIdentifier}) }}"
-                         style="color:black">Your Account</a>
-                    </li>  -->
                 </ul>
                 <div class="navbar-nav ms-auto">
                     <li class="nav-item">

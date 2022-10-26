@@ -51,7 +51,7 @@
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                         id="menu">
                         <li class="nav-item">
-                            <a href="#" class="align-middle px-0">
+                            <a href="../shop/index.php" class="align-middle px-0">
                                 <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Shop</span></a>
                         </li>
                         <br>
@@ -61,8 +61,8 @@
                         </li>
                         <br>
                         <li>
-                            <a href="#" class="px-0 align-middle">
-                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Supplier</span></a>
+                            <a href="../category/index.php" class="px-0 align-middle">
+                                <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Category</span></a>
                         </li>
                         <br>
                         <li>
@@ -71,8 +71,8 @@
                         </li>
                         <br>
                         <li>
-                            <a href="#" class="px-0 align-middle">
-                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span>
+                            <a href="../supplier/index.php" class="px-0 align-middle">
+                                <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Supplier</span>
                             </a>
                         </li>
                         <br>

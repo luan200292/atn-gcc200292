@@ -80,7 +80,6 @@ a {
         <h3>Manage Order</h3>
         <a href="update.php?id=<?= $_GET['id'] ?>&total=<?= $sumTotal[0] ?>"><button type="button"
                 class="btn btn-outline-success">Save</button></a>
-
     </div>
     <div class="page-content mt-4">
         <div class="card">

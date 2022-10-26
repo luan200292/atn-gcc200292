@@ -30,9 +30,9 @@
         <div id="top-header">
             <div class="container">
                 <ul class="header-links float-left">
-                    <li><a href="#"><i class="bi bi-telephone-fill"></i> $Product_Phone</a></li>
-                    <li><a href="#"><i class="bi bi-envelope"></i> $Product_Email</a></li>
-                    <li><a href="#"><i class="bi bi-geo-alt-fill"></i> $Product_Address</a></li>
+                    <li><a href="#"><i class="bi bi-telephone-fill"></i> 19002002</a></li>
+                    <li><a href="#"><i class="bi bi-envelope"></i> atn@gmail.com</a></li>
+                    <!-- <li><a href="#"><i class="bi bi-geo-alt-fill"></i> $Product_Address</a></li> -->
                 </ul>
                 <ul class="header-links float-right">
                     <?php  
@@ -45,7 +45,8 @@
                         <?php 
                             if($_SESSION['role'] == "admin"){ 
                         ?>
-                        <a href="product/index.php" style="text-decoration: none; color: black;"> || <i class="bi bi-gear-fill">Administration</i></a>
+                        <a href="product/index.php" style="text-decoration: none; color: black;"> || <i
+                                class="bi bi-gear-fill">Administration</i></a>
                         <?php } ?>
                     </div>
                     <?php
@@ -61,7 +62,8 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="index.php"><img src="../img/ATN.png" alt="logo" width="80px" height="80px" /></a>
+            <a class="navbar-brand" href="index.php"><img src="../img/ATN.png" alt="logo" width="80px"
+                    height="80px" /></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
