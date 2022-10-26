@@ -27,10 +27,10 @@
 						<div class="footer">
 							<h3 class="footer-title">Contact</h3>
 							<ul class="footer-links">
-								<li><a href="#"><i class="bi bi-facebook"></i>Facebook</a></li>
-								<li><a href="#"><i class="bi bi-geo-alt-fill"></i>$Product_Address</a></li>
-								<li><a href="#"><i class="bi bi-telephone-fill"></i>$Product_Phone</a></li>
-								<li><a href="#"><i class="bi bi-envelope"></i>$Product_Email</a></li>
+								<li><a href="https://www.facebook.com/luan.lytunghien"><i class="bi bi-facebook"></i>Facebook</a></li>
+								<!-- <li><a href="#"><i class="bi bi-geo-alt-fill"></i></a></li> -->
+								<li><a href="#"><i class="bi bi-telephone-fill"></i>19002002</a></li>
+								<li><a href="#"><i class="bi bi-envelope"></i>atn@gmail.com</a></li>
 							</ul>
 						</div>
 					</div>

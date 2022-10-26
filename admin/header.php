@@ -75,7 +75,7 @@
                         <a class="nav-link" href="index.php" style="color:black">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="" style="color:black">New Product</a>
+                        <a class="nav-link" href="new_product.php" style="color:black">New Product</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="cart.php" style="color:black">Cart</a>
