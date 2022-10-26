@@ -70,8 +70,8 @@ a {
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
+                    <th scope="col">Shop ID</th>
+                    <th scope="col">Product Name</th>
                     <th scope="col">Turnover</th>
                     <th scope="col">Cost</th>
                     <th scope="col">Profit</th>
@@ -79,20 +79,22 @@ a {
             </thead>
             <tbody>
                 <?php
-                    $sqlcost = "SELECT p.shop_id, s.shop_name, sum(p.oldprice*p.pro_qty) 
-                    as cost, od.total as turnover, od.total-sum(p.oldprice*p.pro_qty) as profit
+                    $sqlcost = "SELECT s.shop_id, s.shop_name, 
+                    sum(p.oldprice*p.pro_qty) as cost, 
+                    sum(od.total) as turnover, product_name,
+                    od.total-sum(p.oldprice*p.pro_qty) as profit
                     FROM product p 
                     INNER JOIN shop s ON p.shop_id = s.shop_id 
                     INNER JOIN orders_detail od ON p.product_id = od.product_id
                     INNER JOIN orders o ON od.order_id = o.order_id
-                    
-                    group by p.shop_id, s.shop_name, od.total";
+                    group by s.shop_id, s.shop_name, od.total, product_name
+                    Order by s.shop_id ASC";
                     $re1 = pg_query($connect,$sqlcost);
                             while($row=pg_fetch_assoc($re1)){
                             ?>
                 <tr>
                     <td><?=$row['shop_id']?></td>
-                    <td><?=$row['shop_name']?></td>
+                    <td><?=$row['product_name']?></td>
                     <td><?=$row['turnover']?></td>
                     <td><?=$row['cost']?></td>
                     <td><?=$row['profit']?></td>
