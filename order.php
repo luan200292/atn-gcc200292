@@ -30,7 +30,7 @@ include_once("connect.php");
         // Insert Order Detail
 
         //Get ID of order
-        $oid = "SELECT MAX(order_id) as orderid FROM orders";
+        $oid = "SELECT MAX(order_id) as orderid FROM orders where username = '$user'";
         $re3 = pg_query($connect, $oid);
         $row3 = pg_fetch_assoc($re3);
         $orderid = $row3['orderid'];
