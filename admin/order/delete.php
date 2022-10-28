@@ -2,7 +2,7 @@
 include_once("../connect.php");
 
 if(isset($_GET['oid']) && isset($_GET['odid'])){
-    $delQuery = "Delete from orders_detail where orderdetail_id = '".$_GET['odid']."'";
+    $delQuery = "Delete from orders_detail where oderdetail_id = '".$_GET['odid']."'";
     if(pg_query($connect, $delQuery)){
         echo "<script> window.location = 'insertDetail.php?id=".$_GET['oid']."'
         </script>";

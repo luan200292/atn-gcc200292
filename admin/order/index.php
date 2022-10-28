@@ -64,11 +64,11 @@ td, th, a {
                             Update
                         </a>
                     </td>
-                    <!-- <td>
+                    <td>
                         <a href="delete.php?id=<?=$row['order_id']?>" class="btn btn-outline-warning rounded-pill">
                             Delete
                         </a>
-                    </td> -->
+                    </td>
                 </tr>
                 <?php
                             }
