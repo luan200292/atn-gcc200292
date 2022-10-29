@@ -67,41 +67,58 @@ a {
                             ?>
             </tbody>
         </table>
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover" style="width: 50%;">
             <thead>
                 <tr>
                     <th scope="col">Shop ID</th>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Turnover</th>
-                    <th scope="col">Cost</th>
-                    <th scope="col">Profit</th>
+                    <th scope="col">ShopCost</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                    $sqlcost = "SELECT s.shop_id, s.shop_name, 
-                    sum(p.oldprice*p.pro_qty) as cost, 
-                    sum(od.total) as turnover, product_name,
-                    od.total-sum(p.oldprice*p.pro_qty) as profit
-                    FROM product p 
-                    INNER JOIN shop s ON p.shop_id = s.shop_id 
-                    INNER JOIN orders_detail od ON p.product_id = od.product_id
-                    INNER JOIN orders o ON od.order_id = o.order_id
-                    group by s.shop_id, s.shop_name, od.total, product_name
-                    Order by s.shop_id ASC";
+                    $sqlcost = "SELECT s.shop_id, sum(pro_qty*oldprice)  as cost 
+                    from product p 
+                    inner join shop s on s.shop_id = p.shop_id
+                    group by s.shop_id
+                    order by s.shop_id ASC";
                     $re1 = pg_query($connect,$sqlcost);
                             while($row=pg_fetch_assoc($re1)){
                             ?>
                 <tr>
                     <td><?=$row['shop_id']?></td>
-                    <td><?=$row['product_name']?></td>
-                    <td><?=$row['turnover']?></td>
                     <td><?=$row['cost']?></td>
-                    <td><?=$row['profit']?></td>
                 </tr>
                 <?php
                             }
                             ?>
+                
+            </tbody>
+        </table>
+        <table class="table table-striped table-hover" style="width: 50%;">
+            <thead>
+                <tr>
+                    <th scope="col">Shop ID</th>
+                    <th scope="col">Revenue</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    $sqlturnover = "SELECT p.shop_id, sum(od.pro_qty*p.price)  as revenue 
+                    from product p 
+                    inner join orders_detail od on od.product_id = p.product_id
+                    group by p.shop_id
+                    order by p.shop_id ASC";
+                    $re1 = pg_query($connect,$sqlturnover);
+                            while($row=pg_fetch_assoc($re1)){
+                            ?>
+                <tr>
+                    <td><?=$row['shop_id']?></td>
+                    <td><?=$row['revenue']?></td>
+                </tr>
+                <?php
+                            }
+                            ?>
+                
             </tbody>
         </table>
     </div>
