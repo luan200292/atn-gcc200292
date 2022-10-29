@@ -29,7 +29,7 @@ a {
 
 <div class="example-wrapper">
     <div class="container mb-3">
-        <h3>Manager Shop</h3> <a href="insert.php"><button type="button" class="btn btn-outline-success">Insert</button></a>
+        <h3>Manage Shop</h3> <a href="insert.php"><button type="button" class="btn btn-outline-success">Insert</button></a>
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
